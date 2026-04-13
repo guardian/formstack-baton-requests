@@ -1,0 +1,37 @@
+name: CI - Formstack Baton Requests
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  CI:
+    name: Deploy formstack-baton-requests
+    runs-on: ubuntu-latest
+    # Allow GitHub to request an OIDC JWT ID token, to use with aws-actions/configure-aws-credentials
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          aws-region: eu-west-1
+      - name: Setup Java and sbt
+        uses: guardian/setup-scala@v1
+      - name: Build App
+        run: sbt clean compile assembly
+      - name: Upload to Riff Raff
+        uses: guardian/actions-riff-raff@v2
+        with:
+          projectName: formstack-baton-requests
+          buildNumberOffset: 274
+          configPath: ./riff-raff.yaml
+          contentDirectories: |
+            formstack-baton-requests-cfn:
+              - ./cloud-formation.yaml
+            formstack-baton-requests:
+              - ./target/scala-2.12/main.jar

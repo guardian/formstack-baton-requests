@@ -28,7 +28,7 @@ jobs:
         uses: guardian/actions-riff-raff@v2
         with:
           projectName: formstack-baton-requests
-          buildNumberOffset: 274
+          buildNumberOffset: 393
           configPath: ./riff-raff.yaml
           contentDirectories: |
             formstack-baton-requests-cfn:

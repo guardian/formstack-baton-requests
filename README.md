@@ -1,6 +1,6 @@
 # Formstack Baton Requests
 
-Formstack Baton Requests consists of 2 step functions and a number of lambdas, which work together to make Subject Access and Right to Erasure Requests to Formstack.
+Formstack Baton Requests consists of 2-step functions and a number of lambdas, which work together to make Subject Access and Right to Erasure Requests to Formstack.
 
 ## Step functions
 As it can take some time to update DynamoDb with Formstack submissions, we use step functions to overcome the 15 minute time limit of lambdas. 

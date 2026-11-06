@@ -21,7 +21,7 @@ jobs:
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           aws-region: eu-west-1
       - name: Setup Java and sbt
-        uses: guardian/setup-scala@v1
+        uses: guardian/setup-scala@56ec952f11409b28f4f7ae8d442e4d6deb87fc68 # v2.0.1
       - name: Build App
         run: sbt clean compile assembly
       - name: Upload to Riff Raff
